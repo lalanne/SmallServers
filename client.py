@@ -1,10 +1,11 @@
+
 #Create a socket
 
 import socket
 import sys
 
 try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #IPV4 and TCP
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # IPV4 and TCP
     print 'Socket Created'
 
 except socket.error, msg:
