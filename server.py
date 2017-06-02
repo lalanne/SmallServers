@@ -29,7 +29,7 @@ def build_response(msisdn):
 
     msisdn = int(msisdn)
 
-    response = ''
+    response = 'no response'
     if msisdn == 56999694443:
         response = build_base_message(msisdn, RSLT_ERR_PROMO_INEXISTENTE)
     elif msisdn == 56999694444:
@@ -44,9 +44,10 @@ def build_response(msisdn):
             response = build_base_message(msisdn, RSLT_ERR_SIN_SALDO_PP)
         elif epilogue == '10':
             response = build_base_message(msisdn, RSLT_ERR_TIPO_CLIENTE_DST)
+        elif epilogue == '25':
+            response = 'no response'
         else:
             print '[ERROR] not recognized msisdn[' + str(msisdn) + ']'
-
 
     return response
 
@@ -90,7 +91,8 @@ while 1:
     if not data:
         break
 
-    conn.sendall(data)
+    if data != 'no response':
+        conn.sendall(data)
 
 conn.close()
 s.close()
