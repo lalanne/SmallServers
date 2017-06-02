@@ -4,6 +4,9 @@ import sys
 import xml.etree.ElementTree as ET
 
 
+RSLT_ERR_PROMO_INEXISTENTE = 4
+RSLT_EXITO = 0
+
 def build_base_message(msisdn, result):
     message = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n' + \
         '<msg>\n\t' + \
@@ -20,7 +23,9 @@ def build_base_message(msisdn, result):
 
 def build_response(msisdn):
     if msisdn == '56999694444':
-        response = build_base_message(msisdn, 0)
+        response = build_base_message(msisdn, RSLT_ERR_PROMO_INEXISTENTE)
+    else :
+        response = build_base_message(msisdn, RSLT_EXITO)
 
     return response
 

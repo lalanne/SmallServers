@@ -1,10 +1,9 @@
-#Create a socket
 
 import socket
 import sys
 
 try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #IPV4 and TCP
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # IPV4 and TCP
     print 'Socket Created'
 
 except socket.error, msg:
@@ -22,7 +21,7 @@ message = '<?xml version="1.0" encoding="ISO-8859-1"?>' + \
             '<header id_trans="1111" app="xml" user="ussd" passw="ussd" action="1"/>' + \
             '<req>' + \
                 '<op>req_comp_promo</op>' + \
-                '<msisdn>56999694444</msisdn>' + \
+                '<msisdn>' + sys.argv[1] + '</msisdn>' + \
                 '<idPromo>BO_80MB_2D</idPromo>' + \
             '</req>' + \
         '</msg>'
