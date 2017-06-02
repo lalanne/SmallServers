@@ -23,10 +23,20 @@ def build_base_message(msisdn, result):
 
 
 def build_response(msisdn):
-    if msisdn == '56999694444':
+    print '[build_response] msisdn[' + msisdn + ']'
+
+    msisdn = int(msisdn)
+
+    response = ''
+    if msisdn == 56999694443:
         response = build_base_message(msisdn, RSLT_ERR_PROMO_INEXISTENTE)
-    else :
+    elif msisdn == 56999694444:
         response = build_base_message(msisdn, RSLT_EXITO)
+    elif msisdn >= 56999694448 and msisdn <= 56999694459:
+        response = build_base_message(msisdn, RSLT_EXITO)
+    else:
+        print '[ERROR] not recognized msisdn[' + str(msisdn) + ']'
+
 
     return response
 
@@ -51,20 +61,20 @@ print 'Now socket is listening'
 
 while 1:
     conn, addr = s.accept()  # blocking call
+
     print 'Connected with ' + addr[0] + ':' + str(addr[1])
 
     msg = conn.recv(1024)
 
     print 'receiving: [' + msg + ']'
-    root = ET.fromstring(msg)
 
+    root = ET.fromstring(msg)
     req = root.find('req')
     msisdn = req.find('msisdn')
 
     print 'msisdn: [' + str(msisdn.text) + ']'
 
     response = build_response(msisdn.text)
-
     data = str(response)
 
     if not data:
