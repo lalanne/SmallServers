@@ -1,11 +1,29 @@
-#Open a socket
-#Bind to an address(port)
-#Listen for incoming connections
-#Accept connections
-#Read(receive) and response(send)
 
 import socket
 import sys
+import xml.etree.ElementTree as ET
+
+
+def build_base_message(msisdn, result):
+    message = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n' + \
+        '<msg>\n\t' + \
+        '<header action=\"1\" id=\"1111\"  />\n\t' + \
+        '<resp>\n\t\t' + \
+        '<op>rslt_comp_promo</op>\n\t\t' + \
+        '<msisdn>' + str(msisdn) + '</msisdn>\n\t\t' + \
+        '<result>' + str(result) + '</result>\n\t\t' + \
+        '<strresult>OK</strresult>\n\t' + \
+        '</resp>\n' + \
+        '</msg>\n'
+    return message
+
+
+def build_response(msisdn):
+    if msisdn == '56999694444':
+        response = build_base_message(msisdn, 0)
+
+    return response
+
 
 IP = '127.0.0.1'
 PORT = 4040
@@ -21,25 +39,32 @@ except socket.error, msg:
 
 print 'Socket bind complete'
 
-s.listen(10) #backlog = 10, if incoming an 11th connection the request should be rejected
+# backlog = 10, if incoming an 11th connection the request should be rejected
+s.listen(10)
 print 'Now socket is listening'
 
 while 1:
-    conn, addr = s.accept()  #blocking call
+    conn, addr = s.accept()  # blocking call
     print 'Connected with ' + addr[0] + ':' + str(addr[1])
 
-    data = conn.recv(1024)
+    msg = conn.recv(1024)
 
-    print 'receiving: [' + data + ']'
+    print 'receiving: [' + msg + ']'
+    root = ET.fromstring(msg)
 
-    data += '[from the server]'
+    req = root.find('req')
+    msisdn = req.find('msisdn')
 
-    if not data: 
+    print 'msisdn: [' + str(msisdn.text) + ']'
+
+    response = build_response(msisdn.text)
+
+    data = str(response)
+
+    if not data:
         break
 
     conn.sendall(data)
-     
+
 conn.close()
 s.close()
-
-
