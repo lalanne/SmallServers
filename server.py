@@ -6,6 +6,8 @@ import xml.etree.ElementTree as ET
 
 RSLT_EXITO = 0
 RSLT_ERR_PROMO_INEXISTENTE = 4
+RSLT_ERR_SIN_SALDO_PP = 14
+RSLT_ERR_TIPO_CLIENTE_DST = 18
 
 
 def build_base_message(msisdn, result):
@@ -35,7 +37,15 @@ def build_response(msisdn):
     elif msisdn >= 56999694448 and msisdn <= 56999694459:
         response = build_base_message(msisdn, RSLT_EXITO)
     else:
-        print '[ERROR] not recognized msisdn[' + str(msisdn) + ']'
+        epilogue = str(msisdn)[-2:]
+        print 'epilogue[' + epilogue + ']'
+
+        if epilogue == '14':
+            response = build_base_message(msisdn, RSLT_ERR_SIN_SALDO_PP)
+        elif epilogue == '10':
+            response = build_base_message(msisdn, RSLT_ERR_TIPO_CLIENTE_DST)
+        else:
+            print '[ERROR] not recognized msisdn[' + str(msisdn) + ']'
 
 
     return response
