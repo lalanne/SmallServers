@@ -4,8 +4,9 @@ import sys
 import xml.etree.ElementTree as ET
 
 
-RSLT_ERR_PROMO_INEXISTENTE = 4
 RSLT_EXITO = 0
+RSLT_ERR_PROMO_INEXISTENTE = 4
+
 
 def build_base_message(msisdn, result):
     message = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n' + \
@@ -73,3 +74,6 @@ while 1:
 
 conn.close()
 s.close()
+
+
+
