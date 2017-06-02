@@ -52,14 +52,20 @@ def build_response(msisdn):
     return response
 
 
-IP = '127.0.0.1'
-PORT = 4040
+class NetworkConfig:
+    def __init__(self):
+        self.IP = '127.0.0.1'
+        self.PORT = 4040
+
+    def connection_data(self):
+        return (self.IP, self.PORT)
+
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print 'Socket created'
 
 try:
-    s.bind((IP, PORT))
+    s.bind(NetworkConfig().connection_data())
 except socket.error, msg:
     print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
     sys.exit()
