@@ -1,11 +1,9 @@
 
-#Create a socket
-
 import socket
 import sys
 
 try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  # IPV4 and TCP
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # IPV4 and TCP
     print 'Socket Created'
 
 except socket.error, msg:
@@ -18,7 +16,15 @@ remote_port = 4040
 s.connect((remote_ip, remote_port))
 print 'Socket connected to ' + remote_ip + ' on ip ' + remote_ip
 
-message = '093029i0klfjwlkfjlwkjkjqfoijwoefijoiejwf'
+message = '<?xml version="1.0" encoding="ISO-8859-1"?>' + \
+        '<msg>' + \
+            '<header id_trans="1111" app="xml" user="ussd" passw="ussd" action="1"/>' + \
+            '<req>' + \
+                '<op>req_comp_promo</op>' + \
+                '<msisdn>' + sys.argv[1] + '</msisdn>' + \
+                '<idPromo>BO_80MB_2D</idPromo>' + \
+            '</req>' + \
+        '</msg>'
 
 try :
     s.sendall(message)
