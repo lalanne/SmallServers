@@ -7,3 +7,6 @@ Go, C++ and python, probably this will change though
 once boost is installed in the system compilation line:
  * g++ server.cpp -lboost_system
 
+# Executing in Go
+ * go run server.go
+
