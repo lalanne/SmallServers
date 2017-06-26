@@ -51,6 +51,7 @@ func handleRequest(conn net.Conn) {
 		fmt.Println("Error reading:", err.Error())
 	}
 	fmt.Println("incoming len:", reqLen)
+    fmt.Printf("incoming buffer: %s", buf)
 	// Send a response back to person contacting us.
 	conn.Write([]byte("Message received."))
 	// Close the connection when you're done with it.
