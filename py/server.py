@@ -36,6 +36,3 @@ while 1:
 
 conn.close()
 s.close()
-
-
-

@@ -1,7 +1,6 @@
 package main
 
 import (
-	//"code.google.com/p/go-charset/charset"
 	"bytes"
 	"encoding/xml"
 	"fmt"
@@ -60,16 +59,23 @@ type Msg struct {
 	Request Req `xml:"req"`
 }
 
+func buildResponse(msisdn string) string {
+	fmt.Printf("[buildResponse] msisdn[%s]\n", msisdn)
+
+	var ret string = "loco"
+	return ret
+}
+
 func handleRequest(conn net.Conn) {
 	// Make a buffer to hold incoming data.
 	buf := make([]byte, 1024)
 	// Read the incoming connection into the buffer.
 	reqLen, err := conn.Read(buf)
-	if err != nil {
+	if err != nil || reqLen <= 0 {
 		fmt.Println("Error reading:", err.Error())
 	}
-	fmt.Println("incoming len:", reqLen)
-	fmt.Printf("incoming buffer: %s", buf)
+
+	fmt.Printf("incoming buffer: [%s]\n", buf)
 
 	var message Msg
 	reader := bytes.NewReader(buf)
@@ -77,10 +83,13 @@ func handleRequest(conn net.Conn) {
 	decoder.CharsetReader = charset.NewReaderLabel
 	err = decoder.Decode(&message)
 
-	fmt.Printf("msisdn:[%s]", message.Request.Msisdn)
+	fmt.Printf("msisdn:[%s]\n", message.Request.Msisdn)
+
+	var payload string = buildResponse(message.Request.Msisdn)
 
 	// Send a response back to person contacting us.
-	conn.Write([]byte("Message received."))
+	//conn.Write([]byte("Message received."))
+	conn.Write([]byte(payload))
 	// Close the connection when you're done with it.
 	conn.Close()
 }
