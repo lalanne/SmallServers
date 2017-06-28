@@ -130,6 +130,18 @@ func buildResponse(msisdn string) string {
 	return payload
 }
 
+func parseMsisdn(buf []byte) string {
+	var message Msg
+	reader := bytes.NewReader(buf)
+	decoder := xml.NewDecoder(reader)
+	decoder.CharsetReader = charset.NewReaderLabel
+	decoder.Decode(&message)
+
+	fmt.Printf("msisdn:[%s]\n", message.Request.Msisdn)
+
+	return message.Request.Msisdn
+}
+
 func handleRequest(conn net.Conn) {
 	buf := make([]byte, 1024)
 	reqLen, err := conn.Read(buf)
@@ -139,15 +151,7 @@ func handleRequest(conn net.Conn) {
 
 	fmt.Printf("incoming buffer: [%s]\n", buf)
 
-	var message Msg
-	reader := bytes.NewReader(buf)
-	decoder := xml.NewDecoder(reader)
-	decoder.CharsetReader = charset.NewReaderLabel
-	err = decoder.Decode(&message)
-
-	fmt.Printf("msisdn:[%s]\n", message.Request.Msisdn)
-
-	var payload string = buildResponse(message.Request.Msisdn)
+	var payload string = buildResponse(parseMsisdn(buf))
 
 	if payload != "no response" {
 		conn.Write([]byte(payload))
