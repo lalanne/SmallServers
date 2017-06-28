@@ -72,12 +72,12 @@ func handleRequest(conn net.Conn) {
 	fmt.Printf("incoming buffer: %s", buf)
 
 	var message Msg
-	//xml.Unmarshal(buf, &message)
 	reader := bytes.NewReader(buf)
 	decoder := xml.NewDecoder(reader)
 	decoder.CharsetReader = charset.NewReaderLabel
 	err = decoder.Decode(&message)
-	fmt.Println("msisdn:[", message.Request.Msisdn)
+
+	fmt.Printf("msisdn:[%s]", message.Request.Msisdn)
 
 	// Send a response back to person contacting us.
 	conn.Write([]byte("Message received."))
