@@ -59,11 +59,82 @@ type Msg struct {
 	Request Req `xml:"req"`
 }
 
+const (
+	RSLT_EXITO                 = "0"
+	RSLT_ERR_PROMO_INEXISTENTE = "4"
+	RSLT_ERR_SIN_SALDO_PP      = "14"
+	RSLT_ERR_TIPO_CLIENTE_DST  = "18"
+)
+
+func buildResponseBase(msisdn string, result string) string {
+	fmt.Printf("[buildResponse] msisdn[%s] reuslt[%s]\n", msisdn, result)
+
+	var payload string = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
+		"<msg>\n\t" +
+		"<header action=\"1\" id=\"1111\"  />\n\t" +
+		"<resp>\n\t\t" +
+		"<op>rslt_comp_promo</op>\n\t\t" +
+		"<msisdn>" + msisdn + "</msisdn>\n\t\t" +
+		"<result>" + result + "</result>\n\t\t" +
+		"<strresult>OK</strresult>\n\t" +
+		"</resp>\n" +
+		"</msg>\n"
+
+	return payload
+}
+
 func buildResponse(msisdn string) string {
 	fmt.Printf("[buildResponse] msisdn[%s]\n", msisdn)
 
-	var ret string = "loco"
-	return ret
+	var payload string = "no response"
+
+	switch msisdn {
+	case "56999694443":
+		payload = buildResponseBase(msisdn, RSLT_ERR_PROMO_INEXISTENTE)
+	case "56999694444":
+		fallthrough
+	case "56999694448":
+		fallthrough
+	case "56999694449":
+		fallthrough
+	case "56999694450":
+		fallthrough
+	case "56999694451":
+		fallthrough
+	case "56999694452":
+		fallthrough
+	case "56999694453":
+		fallthrough
+	case "56999694454":
+		fallthrough
+	case "56999694455":
+		fallthrough
+	case "56999694456":
+		fallthrough
+	case "56999694457":
+		fallthrough
+	case "56999694458":
+		fallthrough
+	case "56999694459":
+		payload = buildResponseBase(msisdn, RSLT_EXITO)
+	default:
+		var epilogue string = msisdn[len(msisdn)-2:]
+		fmt.Printf("[buildResponse] epilogue[%s]", epilogue)
+
+		switch epilogue {
+		case "14":
+			payload = buildResponseBase(msisdn, RSLT_ERR_SIN_SALDO_PP)
+		case "10":
+			payload = buildResponseBase(msisdn, RSLT_ERR_TIPO_CLIENTE_DST)
+		case "25":
+			payload = "no response"
+		default:
+			fmt.Printf("[buildResponse] not recognized msisdn[%s]", msisdn)
+
+		}
+	}
+
+	return payload
 }
 
 func handleRequest(conn net.Conn) {
@@ -89,7 +160,9 @@ func handleRequest(conn net.Conn) {
 
 	// Send a response back to person contacting us.
 	//conn.Write([]byte("Message received."))
-	conn.Write([]byte(payload))
-	// Close the connection when you're done with it.
-	conn.Close()
+	if payload != "no response" {
+		conn.Write([]byte(payload))
+		// Close the connection when you're done with it.
+		conn.Close()
+	}
 }
