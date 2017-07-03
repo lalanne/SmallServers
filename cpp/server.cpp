@@ -6,7 +6,7 @@ using boost::asio::ip::tcp;
 using namespace std;
 
 const int PORT = 4040;
-const int BUFF_LENGTH = 512;
+const int BUFF_LENGTH = 256;
 const int SUCCESS = 0;
 
 int main() {
