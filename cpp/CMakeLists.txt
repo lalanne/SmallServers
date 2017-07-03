@@ -6,6 +6,6 @@ project (SmallServer)
 
 #target_include_directories (Hello PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 add_executable (server server.cpp)
-#target_link_libraries (helloDemo LINK_PUBLIC Hello)
+target_link_libraries (server boost_system)
 
 
