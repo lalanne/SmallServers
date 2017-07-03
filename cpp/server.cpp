@@ -5,18 +5,22 @@
 using boost::asio::ip::tcp;
 using namespace std;
 
+const int PORT = 4040;
+const int BUFF_LENGTH = 512;
+const int SUCCESS = 0;
+
 int main() {
     cout << "starting server" << endl; 
 
     try{
         boost::asio::io_service io_service;
         //port 4040 tcp version 4
-        tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 4040));
+        tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), PORT));
 
         for(;;) {
             tcp::socket socket(io_service);
             boost::system::error_code error;
-            boost::array<char, 128> buf;
+            boost::array<char, BUFF_LENGTH> buf;
 
             cout << "Waiting for connection..." << endl;
             acceptor.accept(socket);
@@ -39,7 +43,7 @@ int main() {
         cerr << e.what() << endl;
     }
 
-    return 0;
+    return SUCCESS;
 }
 
 
