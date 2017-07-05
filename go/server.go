@@ -33,8 +33,15 @@ func main() {
 			fmt.Println("Error accepting: ", err.Error())
 			os.Exit(1)
 		}
+		buf := make([]byte, 1024)
+		reqLen, err := conn.Read(buf)
+		if err != nil || reqLen <= 0 {
+			fmt.Println("Error reading:", err.Error())
+		}
 
-		handleRequest(conn)
+		fmt.Printf("incoming buffer: [%s]\n", buf)
+
+		handleRequest(conn, buf)
 	}
 }
 
@@ -142,19 +149,12 @@ func parseMsisdn(buf []byte) string {
 	return message.Request.Msisdn
 }
 
-func handleRequest(conn net.Conn) {
-	buf := make([]byte, 1024)
-	reqLen, err := conn.Read(buf)
-	if err != nil || reqLen <= 0 {
-		fmt.Println("Error reading:", err.Error())
-	}
+func handleRequest(connection net.Conn, message []byte) {
 
-	fmt.Printf("incoming buffer: [%s]\n", buf)
+	var response string = buildResponse(parseMsisdn(message))
 
-	var payload string = buildResponse(parseMsisdn(buf))
-
-	if payload != "no response" {
-		conn.Write([]byte(payload))
-		conn.Close()
+	if response != "no response" {
+		connection.Write([]byte(response))
+		connection.Close()
 	}
 }
