@@ -6,6 +6,14 @@ import socket
 import sys
 
 
+def handle_connection(connection, message):
+    msisdn = Parser(message).msisdn()
+    response = str(Response(msisdn.text).build())
+
+    if response != 'no response':
+        connection.sendall(response)
+
+
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     s.bind(NetworkConfig().connection_data())
@@ -22,17 +30,8 @@ while 1:
     msg = conn.recv(1024)
     print 'receiving: [' + msg + ']'
 
-    msisdn = Parser(msg).msisdn()
-    print 'msisdn: [' + str(msisdn.text) + ']'
+    handle_connection(conn, msg)
 
-    response = Response(msisdn.text).build()
-    data = str(response)
-
-    if not data:
-        break
-
-    if data != 'no response':
-        conn.sendall(data)
 
 conn.close()
 s.close()
