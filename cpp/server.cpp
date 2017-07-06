@@ -118,6 +118,20 @@ string select_message(string& msisdn) {
     return response;
 }
 
+void handle_connection(tcp::socket& socket, 
+                    boost::array<char, BUFF_LENGTH>& buf,
+                    const int len) {
+    string data;
+    copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
+    string msisdn = extract_msisdn(data);
+    string response = select_message(msisdn);
+
+    if(response != "no response") {
+        boost::system::error_code ignored_error;
+        boost::asio::write(socket, boost::asio::buffer(response), ignored_error);
+    }
+}
+
 int main() {
     cout << "starting server" << endl; 
 
@@ -135,19 +149,9 @@ int main() {
 
             size_t len = socket.read_some(boost::asio::buffer(buf), error);
 
-            for(int i=0; i<len; ++i) {
-                cout << buf[i];
-            }
-
-            string data;
-            copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
-            string msisdn = extract_msisdn(data);
-            string response = select_message(msisdn);
-
-            if(response != "no response") {
-                boost::system::error_code ignored_error;
-                boost::asio::write(socket, boost::asio::buffer(response), ignored_error);
-            }
+            handle_connection(socket, 
+                            buf,
+                            len);
         }
     }
     catch(exception& e) {
