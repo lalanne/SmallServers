@@ -34,7 +34,7 @@ string extract_msisdn(const string& message) {
          }
     }
 
-    cout << "[extract_msisdn] msisdn[" << msisdn  << "]" << endl;
+    //cout << "[extract_msisdn] msisdn[" << msisdn  << "]" << endl;
     return msisdn;
 }
 
@@ -144,7 +144,7 @@ int main() {
             boost::system::error_code error;
             boost::array<char, BUFF_LENGTH> buf;
 
-            cout << "Waiting for connection..." << endl;
+            //cout << "Waiting for connection..." << endl;
             acceptor.accept(socket);
 
             size_t len = socket.read_some(boost::asio::buffer(buf), error);

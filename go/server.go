@@ -39,7 +39,7 @@ func main() {
 			fmt.Println("Error reading:", err.Error())
 		}
 
-		fmt.Printf("incoming buffer: [%s]\n", buf)
+		//fmt.Printf("incoming buffer: [%s]\n", buf)
 
 		handleRequest(conn, buf)
 	}
@@ -67,7 +67,7 @@ const (
 )
 
 func buildResponseBase(msisdn string, result string) string {
-	fmt.Printf("[buildResponse] msisdn[%s] reuslt[%s]\n", msisdn, result)
+	//fmt.Printf("[buildResponse] msisdn[%s] reuslt[%s]\n", msisdn, result)
 
 	var payload string = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
 		"<msg>\n\t" +
@@ -84,7 +84,7 @@ func buildResponseBase(msisdn string, result string) string {
 }
 
 func buildResponse(msisdn string) string {
-	fmt.Printf("[buildResponse] msisdn[%s]\n", msisdn)
+	//fmt.Printf("[buildResponse] msisdn[%s]\n", msisdn)
 
 	var payload string = "no response"
 
@@ -144,7 +144,7 @@ func parseMsisdn(buf []byte) string {
 	decoder.CharsetReader = charset.NewReaderLabel
 	decoder.Decode(&message)
 
-	fmt.Printf("msisdn:[%s]\n", message.Request.Msisdn)
+	//fmt.Printf("msisdn:[%s]\n", message.Request.Msisdn)
 
 	return message.Request.Msisdn
 }

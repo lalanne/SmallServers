@@ -12,6 +12,7 @@ def handle_connection(connection, message):
 
     if response != 'no response':
         connection.sendall(response)
+    conn.close()
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,5 +34,4 @@ while 1:
     handle_connection(conn, msg)
 
 
-conn.close()
 s.close()
