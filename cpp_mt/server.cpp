@@ -5,6 +5,7 @@
 #include <boost/foreach.hpp>
 #include <boost/asio.hpp>
 
+#include <future>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -145,14 +146,11 @@ int main() {
             boost::system::error_code error;
             boost::array<char, BUFF_LENGTH> buf;
 
-            //cout << "Waiting for connection..." << endl;
             acceptor.accept(socket);
 
             size_t len = socket.read_some(boost::asio::buffer(buf), error);
 
-            handle_connection(socket, 
-                            buf,
-                            len);
+            async(launch::async, handle_connection, std::ref(socket), std::ref(buf), len);
         }
     }
     catch(exception& e) {
