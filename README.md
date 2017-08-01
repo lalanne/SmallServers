@@ -5,7 +5,7 @@ of apps. To have several in different languages will be able to compare performa
 the the low level characteristics of these languages.
 
 # cpp
-    once boost is installed in the system compilation line:
+    Once boost is installed in the system compilation line, this is for mt and st
 ##     Compilation:
 *           $ enter mt or st folder
 *           $ cmake .
@@ -15,6 +15,13 @@ the the low level characteristics of these languages.
 *           $ ./server
 
 # go
+    This is for mt and st
 ##     Execution
-            $ go run server.go
+*           $ enter mt or st folder
+*           $ go run server.go
 
+# python
+    This is for mt and st
+##     Execution
+*           $ enter mt or st folder
+*           $ python server.py
