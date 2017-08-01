@@ -5,7 +5,7 @@ of apps. To have several in different languages will be able to compare performa
 the the low level characteristics of these languages.
 
 # cpp
-    Once boost is installed in the system compilation line, this is for mt and st
+    Boost should be installed in the system, this is for mt and st
 ##     Compilation:
 *           $ enter mt or st folder
 *           $ cmake .
