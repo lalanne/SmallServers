@@ -8,12 +8,12 @@ the the low level characteristics of these languages.
 ##  st and mt:
         once boost is installed in the system compilation line:
 ###     Compilation:
-*           enter mt or st folder
-*           cmake .
-*           make
+*           $ enter mt or st folder
+*           $ cmake .
+*           $ make
 
 ###     Execution:
-*           ./server
+*           $ ./server
 
 # Executing in Go
  * go run server.go
