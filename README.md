@@ -1,11 +1,19 @@
 # SmallServers
-Just Small Servers for fun  and profit. Base for simulators
-The idea for now is to create simple monothread servers for comparison in
-Go, C++ and python, probably this will change though
+Just Small Servers for fun  and profit. 
+The main idea is to have small servers that show the main features of the languages to write this kind 
+of apps. To have several in different languages will be able to compare performace and to learn more about 
+the the low level characteristic of these languages.
 
 # Compilation cpp
-once boost is installed in the system compilation line:
- * g++ server.cpp -lboost_system
+    * st and mt:
+        once boost is installed in the system compilation line:
+            Compilation:
+             * enter mt or st folder
+             * cmake .
+             * make
+
+             Execution:
+             * ./server
 
 # Executing in Go
  * go run server.go
