@@ -5,16 +5,16 @@ of apps. To have several in different languages will be able to compare performa
 the the low level characteristics of these languages.
 
 # cpp
-##  st and mt:
-        once boost is installed in the system compilation line:
-###     Compilation:
+    once boost is installed in the system compilation line:
+##     Compilation:
 *           $ enter mt or st folder
 *           $ cmake .
 *           $ make
 
-###     Execution:
+##     Execution:
 *           $ ./server
 
-# Executing in Go
- * go run server.go
+# go
+##     Execution
+            $ go run server.go
 
