@@ -4,7 +4,7 @@ The main idea is to have small servers that show the main features of the langua
 of apps. To have several in different languages will be able to compare performace and to learn more about 
 the the low level characteristic of these languages.
 
-# Compilation cpp
+# cpp
     * st and mt:
         once boost is installed in the system compilation line:
             Compilation:
