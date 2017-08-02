@@ -3,7 +3,11 @@ project (cpp)
 
 add_compile_options(-std=c++11)
 
-add_executable (mt server.cpp)
+include_directories(../)
+
+add_executable (mt 
+    server.cpp
+    ../response.cpp)
 
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
 
