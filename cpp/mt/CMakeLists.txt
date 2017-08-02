@@ -3,7 +3,9 @@ project (SmallServer)
 
 add_compile_options(-std=c++11)
 
-add_executable (server server.cpp)
+add_executable (server 
+    server.cpp
+    response.cpp)
 
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
 
