@@ -24,6 +24,14 @@ Response::Response(const string& msg) {
     representation_ = msg;
 }
 
+bool Response::operator!=(const Response& rhs) const {
+    return !(this->representation_ == rhs.representation_);
+}
+
+bool Response::operator==(const Response& rhs) const {
+    return this->representation_ == rhs.representation_;
+}
+
 string Response::raw() const {
     return representation_;
 }
