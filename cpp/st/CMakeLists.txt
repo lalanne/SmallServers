@@ -1,12 +1,12 @@
 cmake_minimum_required (VERSION 2.8.12)
-project (SmallServer)
+project (cpp)
 
 add_compile_options(-std=c++11)
 
-add_executable (server 
+add_executable (st 
     response.cpp
     server.cpp)
 
-target_link_libraries (server boost_system)
+target_link_libraries (st boost_system)
 
 
