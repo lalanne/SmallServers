@@ -1,5 +1,6 @@
 
 #include "response.hpp"
+#include "Response.hpp"
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
@@ -23,11 +24,11 @@ void handle_connection(tcp::socket& socket,
     string data;
     copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
     string msisdn = extract_msisdn(data);
-    string response = select_message(msisdn);
+    Response response = select_message(msisdn);
 
-    if(response != "no response") {
+    if(response.raw() != "no response") {
         boost::system::error_code ignored_error;
-        boost::asio::write(socket, boost::asio::buffer(response), ignored_error);
+        boost::asio::write(socket, boost::asio::buffer(response.raw()), ignored_error);
     }
 }
 

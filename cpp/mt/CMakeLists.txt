@@ -7,7 +7,9 @@ include_directories(../)
 
 add_executable (mt 
     server.cpp
-    ../response.cpp)
+    ../response.cpp
+    ../Response.cpp
+    )
 
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
 

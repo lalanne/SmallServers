@@ -7,6 +7,7 @@ include_directories(../)
 
 add_executable (st 
     ../response.cpp
+    ../Response.cpp
     server.cpp)
 
 target_link_libraries (st boost_system)
