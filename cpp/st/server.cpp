@@ -26,7 +26,7 @@ void handle_connection(tcp::socket& socket,
     string msisdn = XmlParser(data).msisdn();
     Response response = response_factory(msisdn);
 
-    if(response.raw() != "no response") {
+    if(response != Response("no response")) {
         boost::system::error_code ignored_error;
         boost::asio::write(socket, boost::asio::buffer(response.raw()), ignored_error);
     }
