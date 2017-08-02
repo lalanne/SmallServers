@@ -3,8 +3,10 @@ project (cpp)
 
 add_compile_options(-std=c++11)
 
+include_directories(../)
+
 add_executable (st 
-    response.cpp
+    ../response.cpp
     server.cpp)
 
 target_link_libraries (st boost_system)
