@@ -1,6 +1,7 @@
 
 #include "response.hpp"
 #include "Response.hpp"
+#include "XmlParser.hpp"
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
@@ -22,7 +23,7 @@ void handle_connection(tcp::socket& socket,
                     const int len) {
     string data;
     copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
-    string msisdn = extract_msisdn(data);
+    string msisdn = XmlParser(data).msisdn();
     Response response = select_message(msisdn);
 
     if(response.raw() != "no response") {

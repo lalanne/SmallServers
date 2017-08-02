@@ -1,31 +1,10 @@
 
 #include "response.hpp"
 
-#include <boost/property_tree/xml_parser.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include <boost/foreach.hpp>
-
-#include <sstream>
 #include <iostream>
 
 using namespace std;
-using boost::property_tree::ptree;
 
-string extract_msisdn(const string& message) {
-    istringstream is(message);
-    string msisdn;
-    ptree pt;
-
-    read_xml(is, pt);
-    BOOST_FOREACH( ptree::value_type const& v, pt.get_child("msg") ) {
-         if( v.first == "req" ) {
-            msisdn = v.second.get<string>("msisdn");
-         }
-    }
-
-    //cout << "[extract_msisdn] msisdn[" << msisdn  << "]" << endl;
-    return msisdn;
-}
 
 Response select_message(string& msisdn) {
     Response response("no response");
