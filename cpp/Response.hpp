@@ -8,7 +8,7 @@ class Response {
         Response(const std::string& msisdn, const std::string& result);
         Response(const std::string& msg);
 
-        std::string raw();
+        std::string raw() const;
 
     private:
         std::string representation_;

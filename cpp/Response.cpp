@@ -24,6 +24,6 @@ Response::Response(const string& msg) {
     representation_ = msg;
 }
 
-string Response::raw() {
+string Response::raw() const {
     return representation_;
 }
