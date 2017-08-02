@@ -1,5 +1,5 @@
 
-#include "response_factory.hpp"
+#include "ResponseBuilder.hpp"
 #include "Response.hpp"
 #include "XmlParser.hpp"
 
@@ -25,7 +25,7 @@ void handle_connection(tcp::socket& socket,
     string data;
     copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
     string msisdn = XmlParser(data).msisdn();
-    Response response = response_factory(msisdn);
+    Response response = ResponseBuilder(msisdn).build();
 
     if(response != Response("no response")) {
         boost::system::error_code ignored_error;

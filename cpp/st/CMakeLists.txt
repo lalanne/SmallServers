@@ -6,7 +6,7 @@ add_compile_options(-std=c++11)
 include_directories(../)
 
 add_executable (st 
-    ../response_factory.cpp
+    ../ResponseBuilder.cpp
     ../Response.cpp
     ../XmlParser.cpp
     server.cpp)
