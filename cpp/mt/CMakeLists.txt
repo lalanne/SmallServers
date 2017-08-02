@@ -7,7 +7,7 @@ include_directories(../)
 
 add_executable (mt 
     server.cpp
-    ../response.cpp
+    ../response_factory.cpp
     ../Response.cpp
     ../XmlParser.cpp
     )

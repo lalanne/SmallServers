@@ -1,12 +1,12 @@
 
-#include "response.hpp"
+#include "response_factory.hpp"
 
 #include <iostream>
 
 using namespace std;
 
 
-Response select_message(string& msisdn) {
+Response response_factory(string& msisdn) {
     Response response("no response");
 
     if(msisdn == "56999694443") {
