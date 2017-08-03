@@ -10,12 +10,13 @@ link_directories(${GMOCK_DIR}/lib)
 
 set(SOURCES
     tests.cpp
+    ResponseTests.cpp
+    ../Response.cpp
 )
 
 add_executable(${BINARY_NAME} ${SOURCES})
 
-include_directories(../include/)
-include_directories(include/)
+include_directories(../)
 
 include_directories(${GTEST_DIR}/include)
 include_directories(${GMOCK_DIR}/include)
