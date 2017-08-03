@@ -4,12 +4,13 @@ project (cpp)
 add_compile_options(-std=c++11)
 
 include_directories(../)
+include_directories(../common/)
 
 add_executable (mt 
     server.cpp
-    ../ResponseBuilder.cpp
-    ../Response.cpp
-    ../XmlParser.cpp
+    ../common/ResponseBuilder.cpp
+    ../common/Response.cpp
+    ../common/XmlParser.cpp
     )
 
 set(CMAKE_EXE_LINKER_FLAGS -pthread)
