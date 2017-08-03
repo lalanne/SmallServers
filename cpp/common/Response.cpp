@@ -25,7 +25,7 @@ Response::Response(const string& msg) {
 }
 
 bool Response::operator!=(const Response& rhs) const {
-    return !(this->representation_ == rhs.representation_);
+    return !(*this == rhs);
 }
 
 bool Response::operator==(const Response& rhs) const {
