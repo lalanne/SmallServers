@@ -10,8 +10,11 @@ link_directories(${GMOCK_DIR}/lib)
 
 set(SOURCES
     tests.cpp
+    helpers.cpp
     ResponseTests.cpp
+    XmlParserTests.cpp
     ../Response.cpp
+    ../XmlParser.cpp
 )
 
 add_executable(${BINARY_NAME} ${SOURCES})

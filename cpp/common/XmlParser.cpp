@@ -24,6 +24,5 @@ string XmlParser::msisdn() const{
          }
     }
 
-    //cout << "[extract_msisdn] msisdn[" << msisdn  << "]" << endl;
     return msisdn;
 }
