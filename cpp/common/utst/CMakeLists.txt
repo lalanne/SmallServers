@@ -12,8 +12,10 @@ set(SOURCES
     tests.cpp
     helpers.cpp
     ResponseTests.cpp
+    ResponseBuilderTests.cpp
     XmlParserTests.cpp
     ../Response.cpp
+    ../ResponseBuilder.cpp
     ../XmlParser.cpp
 )
 
