@@ -1,6 +1,7 @@
 
 import xml.etree.ElementTree as ET
 
+
 class Parser:
     def __init__(self, msg):
         self.msg = msg
