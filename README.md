@@ -17,8 +17,11 @@ the the low level characteristics of these languages.
 # go
     This is for mt and st
 ##     Execution
-*           $ enter mt or st folder
-*           $ go run server.go
+*           * inside go's directory
+*           $ go install common
+            $ go install st
+            $ go install mt
+*           $ bin/mt or bin/st
 
 # python
     This is for mt and st

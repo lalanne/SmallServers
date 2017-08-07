@@ -1,6 +1,7 @@
 package main
 
 import (
+	"common"
 	"fmt"
 	"net"
 	"os"
@@ -14,7 +15,7 @@ const (
 
 func handleRequest(connection net.Conn, message []byte) {
 
-	var response string = buildResponse(parseMsisdn(message))
+	var response string = functions.BuildResponse(functions.ParseMsisdn(message))
 
 	if response != "no response" {
 		connection.Write([]byte(response))

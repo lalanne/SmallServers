@@ -1,49 +1,11 @@
-package main
+package functions
 
 import (
 	"bytes"
 	"encoding/xml"
 	"fmt"
 	"golang.org/x/net/html/charset"
-	"net"
-	"os"
 )
-
-const (
-	CONN_HOST = "localhost"
-	CONN_PORT = "4040"
-	CONN_TYPE = "tcp"
-)
-
-func main() {
-	l, err := net.Listen(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
-
-	if err != nil {
-		fmt.Println("Error listening:", err.Error())
-		os.Exit(1)
-	}
-
-	defer l.Close()
-
-	fmt.Println("Listening on " + CONN_HOST + ":" + CONN_PORT)
-
-	for {
-		conn, err := l.Accept()
-		if err != nil {
-			fmt.Println("Error accepting: ", err.Error())
-			os.Exit(1)
-		}
-		buf := make([]byte, 1024)
-		reqLen, err := conn.Read(buf)
-		if err != nil || reqLen <= 0 {
-			fmt.Println("Error reading:", err.Error())
-		}
-
-		//fmt.Printf("incoming buffer: [%s]\n", buf)
-
-		go handleRequest(conn, buf)
-	}
-}
 
 type Req struct {
 	Op      string `xml:"op"`
@@ -83,7 +45,7 @@ func buildResponseBase(msisdn string, result string) string {
 	return payload
 }
 
-func buildResponse(msisdn string) string {
+func BuildResponse(msisdn string) string {
 	//fmt.Printf("[buildResponse] msisdn[%s]\n", msisdn)
 
 	var payload string = "no response"
@@ -137,7 +99,7 @@ func buildResponse(msisdn string) string {
 	return payload
 }
 
-func parseMsisdn(buf []byte) string {
+func ParseMsisdn(buf []byte) string {
 	var message Msg
 	reader := bytes.NewReader(buf)
 	decoder := xml.NewDecoder(reader)
@@ -147,14 +109,4 @@ func parseMsisdn(buf []byte) string {
 	//fmt.Printf("msisdn:[%s]\n", message.Request.Msisdn)
 
 	return message.Request.Msisdn
-}
-
-func handleRequest(connection net.Conn, message []byte) {
-
-	var response string = buildResponse(parseMsisdn(message))
-
-	if response != "no response" {
-		connection.Write([]byte(response))
-		connection.Close()
-	}
 }
