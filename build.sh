@@ -51,6 +51,7 @@ echo ""
 
 echo ""
 echo "Executing GO unit tests..."
+cd .
 path=`pwd`
 export GOPATH=$path/go/
 go test common -cover
@@ -59,6 +60,29 @@ if [ "$ret" = "0" ]; then
     echo "GO UTESTS SUCCESS!!!!"
 else
     echo "GO UTESTS FAILED!!!!!"
+    exit 1 
+fi 
+cd -
+echo ""
+
+echo ""
+echo "Building PYTHON..."
+echo ""
+
+echo ""
+echo "Building PYTHON unit tests..."
+echo ""
+
+echo ""
+echo "Executing PYTHON unit tests..."
+cd py/common/utst/
+export PYTHONPATH=../
+pytest
+ret=$?
+if [ "$ret" = "0" ]; then
+    echo "PY UTESTS SUCCESS!!!!"
+else
+    echo "PY UTESTS FAILED!!!!!"
     exit 1 
 fi 
 cd -
