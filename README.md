@@ -1,3 +1,6 @@
+
+[![Build Status](https://travis-ci.org/lalanne/SmallServers.svg?branch=develop)](https://travis-ci.org/lalanne/SmallServers)
+
 # SmallServers
 Just Small Servers for fun  and profit. 
 The main idea is to have small servers that show the main features of the languages to write this kind 
