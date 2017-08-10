@@ -9,6 +9,7 @@ before_install:
     - sudo make
     - sudo cp -a include/gtest /usr/include
     - sudo cp -a libgtest_main.so libgtest.so /usr/lib/
+    - sudo apt-get install libboost-dev
     - cd "${TRAVIS_BUILD_DIR}"
 
 script:
