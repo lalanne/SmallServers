@@ -3,4 +3,5 @@ project (cpp)
 
 add_subdirectory(st)
 add_subdirectory(mt)
+add_subdirectory(common)
 
