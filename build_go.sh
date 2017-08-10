@@ -18,6 +18,7 @@ echo ""
 echo "Executing GO unit tests..."
 cd .
 path=`pwd`
+echo $path
 export GOPATH=$path/go/
 go test common -cover
 ret=$?
