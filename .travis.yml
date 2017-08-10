@@ -13,3 +13,4 @@ before_install:
 
 script:
     - ./build_cpp.sh
+    - ./build_go.sh
