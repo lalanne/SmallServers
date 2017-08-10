@@ -12,4 +12,4 @@ before_install:
 	- cd "${TRAVIS_BUILD_DIR}"
 
 script:
-	- ./build.sh
+	- ./build_cpp.sh
