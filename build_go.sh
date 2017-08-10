@@ -3,6 +3,7 @@
 echo ""
 echo "Building GO..."
 cd go/
+echo `pwd`
 go get golang.org/x/net/html/charset
 go clean
 go install common
