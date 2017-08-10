@@ -3,7 +3,9 @@
 echo ""
 echo "Building GO..."
 cd go/
-echo `pwd`
+path=`pwd`
+echo $path
+export GOPATH=$path
 go get golang.org/x/net/html/charset
 go clean
 go install common
