@@ -12,6 +12,7 @@ echo ""
 
 echo "Executing CPP unit tests..."
 cd cpp/common/utst/
+echo `pwd`
 ./tests
 ret=$?
 if [ "$ret" = "0" ]; then
