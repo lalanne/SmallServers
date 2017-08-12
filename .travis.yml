@@ -13,6 +13,6 @@ before_install:
     - cd "${TRAVIS_BUILD_DIR}"
 
 script:
-    - ./build_cpp.sh
-    - ./build_go.sh
     - ./build_py.sh
+    - ./build_go.sh
+    - ./build_cpp.sh
