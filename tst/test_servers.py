@@ -22,8 +22,19 @@ class TestServers(object):
 
         s.connect((remote_ip, remote_port))
         print 'Socket connected to ' + remote_ip + ' on ip ' + remote_ip
+        expected_response = \
+            '<?xml version="1.0" encoding="ISO-8859-1"?>' + \
+            '<msg>' + \
+            '<header action="1" id="1111"  />' + \
+            '<resp>' + \
+            '<op>rslt_comp_promo</op>' + \
+            '<msisdn>56999694444</msisdn>' + \
+            '<result>0</result>' + \
+            '<strresult>OK</strresult>' + \
+            '</resp>' + \
+            '</msg>'
 
-        message = '<?xml version="1.0" encoding="ISO-8859-1"?>' + \
+        request = '<?xml version="1.0" encoding="ISO-8859-1"?>' + \
             '<msg>' + \
             '<header action="1" id="1111"  />' + \
             '<req>' + \
@@ -35,7 +46,7 @@ class TestServers(object):
             '</msg>'
 
         try:
-            s.sendall(message)
+            s.sendall(request)
         except socket.error:
             print 'Send failed'
             sys.exit()
@@ -44,5 +55,7 @@ class TestServers(object):
         # Now receive data
         reply = s.recv(4096)
         print 'message from server[' + reply + ']'
+
+        assert expected_response == reply
 
         s.close()

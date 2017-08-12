@@ -1,15 +1,15 @@
 
 def build_base_message(msisdn, result):
-    message = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n' + \
-        '<msg>\n\t' + \
-        '<header action=\"1\" id=\"1111\"  />\n\t' + \
-        '<resp>\n\t\t' + \
-        '<op>rslt_comp_promo</op>\n\t\t' + \
-        '<msisdn>' + str(msisdn) + '</msisdn>\n\t\t' + \
-        '<result>' + str(result) + '</result>\n\t\t' + \
-        '<strresult>OK</strresult>\n\t' + \
-        '</resp>\n' + \
-        '</msg>\n'
+    message = '<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>' + \
+        '<msg>' + \
+        '<header action=\"1\" id=\"1111\"  />' + \
+        '<resp>' + \
+        '<op>rslt_comp_promo</op>' + \
+        '<msisdn>' + str(msisdn) + '</msisdn>' + \
+        '<result>' + str(result) + '</result>' + \
+        '<strresult>OK</strresult>' + \
+        '</resp>' + \
+        '</msg>'
     return message
 
 
