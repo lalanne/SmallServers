@@ -21,16 +21,16 @@ func buildRequestMessage(msisdn string) string {
 
 func buildResponseMessage(msisdn string, result string) string {
 
-	var payload string = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n" +
-		"<msg>\n\t" +
-		"<header action=\"1\" id=\"1111\"  />\n\t" +
-		"<resp>\n\t\t" +
-		"<op>rslt_comp_promo</op>\n\t\t" +
-		"<msisdn>" + msisdn + "</msisdn>\n\t\t" +
-		"<result>" + result + "</result>\n\t\t" +
-		"<strresult>OK</strresult>\n\t" +
-		"</resp>\n" +
-		"</msg>\n"
+	var payload string = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>" +
+		"<msg>" +
+		"<header action=\"1\" id=\"1111\"/>" +
+		"<resp>" +
+		"<op>rslt_comp_promo</op>" +
+		"<msisdn>" + msisdn + "</msisdn>" +
+		"<result>" + result + "</result>" +
+		"<strresult>OK</strresult>" +
+		"</resp>" +
+		"</msg>"
 
 	return payload
 }
