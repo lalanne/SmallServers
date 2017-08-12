@@ -25,7 +25,7 @@ class TestServers(object):
         expected_response = \
             '<?xml version="1.0" encoding="ISO-8859-1"?>' + \
             '<msg>' + \
-            '<header action="1" id="1111"  />' + \
+            '<header action="1" id="1111"/>' + \
             '<resp>' + \
             '<op>rslt_comp_promo</op>' + \
             '<msisdn>56999694444</msisdn>' + \
