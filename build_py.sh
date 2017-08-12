@@ -51,7 +51,7 @@ export PYTHONPATH=../common/
 python server.py &
 server_pid=$!
 cd -
-sleep 4:
+sleep 4
 
 
 cd tst
