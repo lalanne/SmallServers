@@ -45,13 +45,13 @@ cd -
 
 kill $server_pid
 
-sleep 5
+sleep 40
 cd py/mt/
 export PYTHONPATH=../common/
 python server.py &
 server_pid=$!
 cd -
-sleep 2
+sleep 4:
 
 
 cd tst
