@@ -24,13 +24,12 @@ cd -
 echo ""
 
 
-sleep 2
 cd py/st/
 export PYTHONPATH=../common/
 python server.py &
 server_pid=$!
 cd -
-sleep 2
+sleep 4
 
 
 cd tst
@@ -46,7 +45,7 @@ cd -
 
 kill $server_pid
 
-sleep 2
+sleep 5
 cd py/mt/
 export PYTHONPATH=../common/
 python server.py &

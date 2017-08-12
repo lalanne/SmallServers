@@ -14,5 +14,7 @@ before_install:
 
 script:
     - ./build_py.sh
+    - sleep 10
     - ./build_go.sh
+    - sleep 10
     - ./build_cpp.sh
