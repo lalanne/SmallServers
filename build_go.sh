@@ -34,3 +34,48 @@ else
 fi 
 cd -
 echo ""
+
+sleep 2
+cd go/bin/
+./st &
+server_pid=$!
+cd -
+sleep 2
+
+
+cd tst
+pytest
+ret=$?
+if [ "$ret" = "0" ]; then
+    echo "GO ST FUNCTIONAL SUCCESS!!!!"
+else
+    echo "GO ST FUNCTIONAL FAILED!!!!!"
+    exit 1 
+fi 
+cd -
+
+kill $server_pid
+
+sleep 2
+cd go/bin/
+./mt &
+server_pid=$!
+cd -
+sleep 2
+
+
+cd tst
+pytest
+ret=$?
+if [ "$ret" = "0" ]; then
+    echo "GO MT FUNCTIONAL SUCCESS!!!!"
+else
+    echo "GO MT FUNCTIONAL FAILED!!!!!"
+    exit 1 
+fi 
+cd -
+
+kill $server_pid
+
+
+
