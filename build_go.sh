@@ -35,12 +35,10 @@ fi
 cd -
 echo ""
 
-sleep 2
 cd go/bin/
 ./st 127.0.0.1 4060&
 server_pid=$!
 cd -
-sleep 2
 
 
 cd tst
@@ -56,12 +54,10 @@ cd -
 
 kill $server_pid
 
-sleep 2
 cd go/bin/
 ./mt 127.0.0.1 4070&
 server_pid=$!
 cd -
-sleep 2
 
 
 cd tst

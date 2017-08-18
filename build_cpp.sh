@@ -32,12 +32,10 @@ execute_unit_tests_cpp() {
 build_cpp
 execute_unit_tests_cpp
 
-sleep 2
 cd cpp/st/
 ./st 127.0.0.1 4080&
 server_pid=$!
 cd -
-sleep 2
 
 
 cd tst
@@ -53,12 +51,10 @@ cd -
 
 kill $server_pid
 
-sleep 2
 cd cpp/mt/
 ./mt 127.0.0.1 4090&
 server_pid=$!
 cd -
-sleep 2
 
 
 cd tst

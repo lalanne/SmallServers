@@ -29,7 +29,6 @@ export PYTHONPATH=../common/
 python server.py 127.0.0.1 4040&
 server_pid=$!
 cd -
-sleep 4
 
 
 cd tst
@@ -45,13 +44,11 @@ cd -
 
 kill $server_pid
 
-sleep 10
 cd py/mt/
 export PYTHONPATH=../common/
 python server.py 127.0.0.1 4050&
 server_pid=$!
 cd -
-sleep 4
 
 
 cd tst
