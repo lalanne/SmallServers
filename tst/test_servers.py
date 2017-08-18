@@ -5,7 +5,8 @@ import sys
 
 class TestServers(object):
 
-    def test_msisdn(self):
+    def test_msisdn(self, cmdopt):
+        print 'port[' + cmdopt + ']'
         try:
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             print 'Socket Created'
@@ -18,7 +19,7 @@ class TestServers(object):
             sys.exit()
 
         remote_ip = '127.0.0.1'
-        remote_port = 4040
+        remote_port = int(cmdopt)
 
         s.connect((remote_ip, remote_port))
         print 'Socket connected to ' + remote_ip + ' on ip ' + remote_ip

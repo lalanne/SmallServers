@@ -26,14 +26,14 @@ echo ""
 
 cd py/st/
 export PYTHONPATH=../common/
-python server.py &
+python server.py 127.0.0.1 4040&
 server_pid=$!
 cd -
 sleep 4
 
 
 cd tst
-pytest
+pytest -q --cmdopt=4040
 ret=$?
 if [ "$ret" = "0" ]; then
     echo "PY ST FUNCTIONAL SUCCESS!!!!"
@@ -45,17 +45,17 @@ cd -
 
 kill $server_pid
 
-sleep 40
+sleep 10
 cd py/mt/
 export PYTHONPATH=../common/
-python server.py &
+python server.py 127.0.0.1 4050&
 server_pid=$!
 cd -
 sleep 4
 
 
 cd tst
-pytest
+pytest -q --cmdopt=4050
 ret=$?
 if [ "$ret" = "0" ]; then
     echo "PY MT FUNCTIONAL SUCCESS!!!!"

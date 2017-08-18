@@ -34,14 +34,14 @@ execute_unit_tests_cpp
 
 sleep 2
 cd cpp/st/
-./st &
+./st 127.0.0.1 4080&
 server_pid=$!
 cd -
 sleep 2
 
 
 cd tst
-pytest
+pytest -q --cmdopt=4080
 ret=$?
 if [ "$ret" = "0" ]; then
     echo "CPP ST FUNCTIONAL SUCCESS!!!!"
@@ -55,14 +55,14 @@ kill $server_pid
 
 sleep 2
 cd cpp/mt/
-./mt &
+./mt 127.0.0.1 4090&
 server_pid=$!
 cd -
 sleep 2
 
 
 cd tst
-pytest
+pytest -q --cmdopt=4090
 ret=$?
 if [ "$ret" = "0" ]; then
     echo "CPP MT FUNCTIONAL SUCCESS!!!!"

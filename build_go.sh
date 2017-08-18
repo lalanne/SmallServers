@@ -37,14 +37,14 @@ echo ""
 
 sleep 2
 cd go/bin/
-./st &
+./st 127.0.0.1 4060&
 server_pid=$!
 cd -
 sleep 2
 
 
 cd tst
-pytest
+pytest -q --cmdopt=4060
 ret=$?
 if [ "$ret" = "0" ]; then
     echo "GO ST FUNCTIONAL SUCCESS!!!!"
@@ -58,14 +58,14 @@ kill $server_pid
 
 sleep 2
 cd go/bin/
-./mt &
+./mt 127.0.0.1 4070&
 server_pid=$!
 cd -
 sleep 2
 
 
 cd tst
-pytest
+pytest -q --cmdopt=4070
 ret=$?
 if [ "$ret" = "0" ]; then
     echo "GO MT FUNCTIONAL SUCCESS!!!!"
