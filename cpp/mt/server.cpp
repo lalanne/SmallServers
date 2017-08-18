@@ -14,9 +14,9 @@ using boost::asio::ip::tcp;
 
 using namespace std;
 
-const int PORT                          = 4040;
 const int BUFF_LENGTH                   = 256;
 const int SUCCESS                       = 0;
+const int CORRECT_NUMBERS_OF_ARGUMENTS  = 3;
 
 
 void handle_connection(tcp::socket& socket, 
@@ -33,12 +33,18 @@ void handle_connection(tcp::socket& socket,
     }
 }
 
-int main() {
-    cout << "starting server" << endl; 
+int main(int argc, char* argv[]) {
+    if(argc != CORRECT_NUMBERS_OF_ARGUMENTS) {
+        cout << "ERROR: wrong number of parameters [" << argc << "]" <<endl;
+        return SUCCESS;
+    }
+    cout << "ip[" << argv[1] << "] port[" << argv[2] << "]";
+    int port = stoi(argv[2]);
+    string ip = argv[1];
 
     try{
         boost::asio::io_service io_service;
-        tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), PORT));
+        tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), port));
 
         for(;;) {
             tcp::socket socket(io_service);

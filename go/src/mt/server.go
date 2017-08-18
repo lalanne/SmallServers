@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"strconv"
 )
 
 const (
-	CONN_HOST = "localhost"
-	CONN_PORT = "4040"
 	CONN_TYPE = "tcp"
+	SUCCESS   = 0
 )
 
 func handleRequest(connection net.Conn, message []byte) {
@@ -24,7 +24,16 @@ func handleRequest(connection net.Conn, message []byte) {
 }
 
 func main() {
-	l, err := net.Listen(CONN_TYPE, CONN_HOST+":"+CONN_PORT)
+	fmt.Println("Number of arguments: [" + strconv.Itoa(len(os.Args)) + "]")
+	if len(os.Args) != 3 {
+		fmt.Println("Error: Wrong number of command line arguments!!!")
+		os.Exit(SUCCESS)
+	}
+
+	ip := os.Args[1]
+	port := os.Args[2]
+
+	l, err := net.Listen(CONN_TYPE, ip+":"+port)
 
 	if err != nil {
 		fmt.Println("Error listening:", err.Error())
@@ -33,7 +42,7 @@ func main() {
 
 	defer l.Close()
 
-	fmt.Println("Listening on " + CONN_HOST + ":" + CONN_PORT)
+	fmt.Println("Listening on " + ip + ":" + port)
 
 	for {
 		conn, err := l.Accept()
@@ -52,4 +61,3 @@ func main() {
 		go handleRequest(conn, buf)
 	}
 }
-
