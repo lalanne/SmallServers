@@ -10,9 +10,11 @@ the the low level characteristics of these languages.
 ## cpp
     Boost should be installed in the system, this is for mt and st
 ###     Compilation:
-*           $ enter mt or st folder
-*           $ cmake .
-*           $ make
+```
+$ enter mt or st folder
+$ cmake .
+$ make
+```
 
 ###     Execution:
 *           $ ./server
