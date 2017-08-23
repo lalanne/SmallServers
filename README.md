@@ -15,7 +15,6 @@ $ cd cpp
 $ cmake .
 $ make
 ```
-
 ### Execution:
  - **target:** mt or st
  - **ip:** server ip
@@ -24,32 +23,31 @@ $ make
 $ cd target
 $ ./target <ip> <port>
 ```
-
 ### Testing:
 Root of the project
 ```
 ./build_cpp.sh
 ```
-
 ## go
     This is for mt and st
+### dependencies
+```
+$ go get golang.org/x/net/html/charset
+```
 ### Build
 ```
 $ go install common
 $ go install st
 $ go install mt
 ```
-
 ### Execution:
  - **target:** mt or st
  - **ip:** server ip
  - **port:** service port
-
 ```
 $ cd bin
 $ ./target <ip> <port>
 ```
-
 ## python
     This is for mt and st
 ###     Execution
