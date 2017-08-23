@@ -32,10 +32,12 @@ Root of the project
     This is for mt and st
 ### dependencies
 ```
+$ cd go
 $ go get golang.org/x/net/html/charset
 ```
 ### Build
 ```
+$ cd go
 $ go install common
 $ go install st
 $ go install mt
@@ -48,8 +50,25 @@ $ go install mt
 $ cd bin
 $ ./target <ip> <port>
 ```
+### Testing
+Root of the project
+```
+./build_go.sh
+```
 ## python
     This is for mt and st
-###     Execution
-*           $ enter mt or st folder
-*           $ python server.py
+### Execution
+ - **target:** mt or st
+ - **ip:** server ip
+ - **port:** service port
+```
+$ cd target
+$ python server.py <ip> <port>
+```
+### Testing
+Root of the project
+```
+./build_py.sh
+```
+
+
