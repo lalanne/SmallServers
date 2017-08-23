@@ -17,9 +17,9 @@ $ make
 ```
 
 ### Execution:
-**target:** mt or st
-**ip:** server ip
-**port:** service port
+ - **target:** mt or st
+ - **ip:** server ip
+ - **port:** service port
 ```
 $ cd target
 $ ./target <ip> <port>
