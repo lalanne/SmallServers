@@ -9,7 +9,7 @@ the the low level characteristics of these languages.
 
 ## cpp
     Boost should be installed in the system, this is for mt and st
-### Compilation:
+### Build:
 ```
 $ cd cpp
 $ cmake .
@@ -33,12 +33,22 @@ Root of the project
 
 ## go
     This is for mt and st
-###     Execution
-*           * inside go's directory
-*           $ go install common
-            $ go install st
-            $ go install mt
-*           $ bin/mt or bin/st
+### Build
+```
+$ go install common
+$ go install st
+$ go install mt
+```
+
+### Execution:
+ - **target:** mt or st
+ - **ip:** server ip
+ - **port:** service port
+
+```
+$ cd bin
+$ ./target <ip> <port>
+```
 
 ## python
     This is for mt and st
