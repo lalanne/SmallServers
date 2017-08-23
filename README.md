@@ -17,9 +17,18 @@ $ make
 ```
 
 ### Execution:
+**target:** mt or st
+**ip:** server ip
+**port:** service port
 ```
-$ cd <mt/st>
-$ ./<mt/st> <ip> <port>
+$ cd target
+$ ./target <ip> <port>
+```
+
+### Testing:
+Root of the project
+```
+./build_cpp.sh
 ```
 
 ## go
