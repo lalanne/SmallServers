@@ -56,7 +56,7 @@ func main() {
 			fmt.Println("Error reading:", err.Error())
 		}
 
-		//fmt.Printf("incoming buffer: [%s]\n", buf)
+		fmt.Printf("incoming buffer: [%s]\n", buf)
 
 		go handleRequest(conn, buf)
 	}
