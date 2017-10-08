@@ -45,14 +45,14 @@ while 1:
     s.listen(BACKLOG_CONNECTIONS)
 
     conn, addr = s.accept()  # blocking call
-    print 'Connected with ' + addr[0] + ':' + str(addr[1])
+    # print 'Connected with ' + addr[0] + ':' + str(addr[1])
 
     msg = conn.recv(NUMBER_OF_BYTES_RECEIVED)
-    print 'receiving: [' + msg + ']'
+    print msg
 
     t = threading.Thread(target=handle_connection, args=(conn, msg,))
     t.start()
-    print 'active threads[' + str(threading.activeCount()) + ']'
+    # print 'active threads[' + str(threading.activeCount()) + ']'
 
 
 s.close()

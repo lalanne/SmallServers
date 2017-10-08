@@ -40,10 +40,10 @@ except socket.error, msg:
 s.listen(BACKLOG_CONNECTIONS)
 while INFINITE_LOOP:
     conn, addr = s.accept()  # blocking call
-    print 'Connected with ' + addr[0] + ':' + str(addr[1])
+    # print 'Connected with ' + addr[0] + ':' + str(addr[1])
 
     msg = conn.recv(NUMBER_OF_BYTES_RECEIVED)
-    print 'receiving: [' + msg + ']'
+    print msg
 
     handle_connection(conn, msg)
 

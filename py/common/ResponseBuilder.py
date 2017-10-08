@@ -22,7 +22,7 @@ class Response:
         self.RSLT_ERR_TIPO_CLIENTE_DST = 18
 
     def build(self):
-        print '[build] msisdn[' + str(self.msisdn) + ']'
+        # print '[build] msisdn[' + str(self.msisdn) + ']'
 
         response = 'no response'
         if self.msisdn == 56999694443:
