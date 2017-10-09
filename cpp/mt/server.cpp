@@ -14,7 +14,7 @@ using boost::asio::ip::tcp;
 
 using namespace std;
 
-const int BUFF_LENGTH                   = 256;
+const int BUFF_LENGTH                   = 1024;
 const int SUCCESS                       = 0;
 const int CORRECT_NUMBERS_OF_ARGUMENTS  = 3;
 
@@ -54,6 +54,11 @@ int main(int argc, char* argv[]) {
             acceptor.accept(socket);
 
             size_t len = socket.read_some(boost::asio::buffer(buf), error);
+
+            string data;
+            copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
+
+            cout << data;
 
             async(launch::async, handle_connection, std::ref(socket), std::ref(buf), len);
         }
