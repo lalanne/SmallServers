@@ -16,8 +16,7 @@ using namespace std;
 
 const int BUFF_LENGTH                   = 1024;
 const int SUCCESS                       = 0;
-const int CORRECT_NUMBERS_OF_ARGUMENTS  = 3;
-
+const int FAIL                          = 1;
 
 void handle_connection(tcp::socket& socket, 
                     boost::array<char, BUFF_LENGTH>& buf,
@@ -34,13 +33,27 @@ void handle_connection(tcp::socket& socket,
 }
 
 int main(int argc, char* argv[]) {
-    if(argc != CORRECT_NUMBERS_OF_ARGUMENTS) {
-        cout << "ERROR: wrong number of parameters [" << argc << "]" <<endl;
-        return SUCCESS;
+    if(argc < 3 && argc > 4) {
+        cout << "ERROR: wrong number of parameters [" << argc << "]" << endl;
+        return FAIL;
     }
-    cout << "ip[" << argv[1] << "] port[" << argv[2] << "]";
+    cout << "ip[" << argv[1] << "] port[" << argv[2] << "]" << endl;
     int port = stoi(argv[2]);
     string ip = argv[1];
+    bool logs = false;
+
+    if(argc == 4) {
+        if(string(argv[3]) == "on") {
+            logs = true;
+        }
+        else if(string(argv[3]) == "off") {
+            logs = false;
+        }
+        else {
+            cout << "ERROR: wrong number of parameters [" << argc << "]" <<endl;
+            return FAIL;
+        }
+    }
 
     try{
         boost::asio::io_service io_service;
@@ -58,7 +71,7 @@ int main(int argc, char* argv[]) {
             string data;
             copy(buf.begin(), buf.begin()+len, std::back_inserter(data));
 
-            cout << data;
+            if(logs) cout << data;
 
             async(launch::async, handle_connection, std::ref(socket), std::ref(buf), len);
         }
