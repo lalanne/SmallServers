@@ -5,8 +5,9 @@ from Parser import Parser
 import socket
 import sys
 
-ALLOWED_NUMBER_OF_ARGUMENTS = 3
 SUCCESS = 0
+FAIL = 1
+
 IP_POSITION = 1
 PORT_POSITION = 2
 NUMBER_OF_BYTES_RECEIVED = 1024
@@ -23,9 +24,21 @@ def handle_connection(connection, message):
     conn.close()
 
 
-if(len(sys.argv) != ALLOWED_NUMBER_OF_ARGUMENTS):
+if(len(sys.argv) < 3 and len(sys.argv) > 4):
     print 'ERROR: Wrong Number of arguments!!!'
-    exit(SUCCESS)
+    exit(FAIL)
+
+logs = False
+
+if(len(sys.argv) == 4):
+    if(sys.argv[3] == "on"):
+        logs = True
+    elif(sys.argv[3] == "off"):
+        logs = False
+    else:
+        print 'ERROR: wrong log option!!!'
+        exit(FAIL)
+
 
 networkConfig = NetworkConfig(sys.argv[IP_POSITION], sys.argv[PORT_POSITION])
 
@@ -43,7 +56,8 @@ while INFINITE_LOOP:
     # print 'Connected with ' + addr[0] + ':' + str(addr[1])
 
     msg = conn.recv(NUMBER_OF_BYTES_RECEIVED)
-    print msg
+    if(logs):
+        print msg
 
     handle_connection(conn, msg)
 
