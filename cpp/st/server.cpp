@@ -13,9 +13,16 @@ using boost::asio::ip::tcp;
 
 using namespace std;
 
-const int BUFF_LENGTH                   = 1024;
-const int SUCCESS                       = 0;
-const int FAIL                          = 1;
+const int BUFF_LENGTH                       = 1024;
+const int SUCCESS                           = 0;
+const int FAIL                              = 1;
+const int IP_POSITION                       = 1;
+const int PORT_POSITION                     = 2;
+const int LOG_OPTION_POSITION               = 3;
+const int NUMBER_OF_ARGUMENTS_LOG_OPTION    = 4;
+const int NUMBER_OF_ARGUMENTS_NO_LOG_OPTION = 3;
+const string LOG_ON                         = "on";
+const string LOG_OFF                        = "off";
 
 void handle_connection(tcp::socket& socket, 
                     boost::array<char, BUFF_LENGTH>& buf,
@@ -32,20 +39,24 @@ void handle_connection(tcp::socket& socket,
 }
 
 int main(int argc, char* argv[]) {
-    if(argc < 3 && argc > 4) {
+    if(argc < NUMBER_OF_ARGUMENTS_NO_LOG_OPTION &&
+            argc > NUMBER_OF_ARGUMENTS_NO_LOG_OPTION) {
         cout << "ERROR: wrong number of parameters [" << argc << "]" << endl;
         return FAIL;
     }
-    cout << "ip[" << argv[1] << "] port[" << argv[2] << "]" << endl;
-    int port = stoi(argv[2]);
-    string ip = argv[1];
+    cout << "ip[" << argv[IP_POSITION]
+        << "] port[" << argv[PORT_POSITION]
+        << "]" << endl;
+
+    int port = stoi(argv[PORT_POSITION]);
+    string ip = argv[IP_POSITION];
     bool logs = false;
 
-    if(argc == 4) {
-        if(string(argv[3]) == "on") {
+    if(argc == NUMBER_OF_ARGUMENTS_LOG_OPTION) {
+        if(string(argv[LOG_OPTION_POSITION]) == "on") {
             logs = true;
         }
-        else if(string(argv[3]) == "off") {
+        else if(string(argv[LOG_OPTION_POSITION]) == "off") {
             logs = false;
         }
         else {
