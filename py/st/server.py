@@ -10,9 +10,14 @@ FAIL = 1
 
 IP_POSITION = 1
 PORT_POSITION = 2
+LOG_OPTION_POSITION = 3
 NUMBER_OF_BYTES_RECEIVED = 1024
 BACKLOG_CONNECTIONS = 10
 INFINITE_LOOP = 1
+NUMBER_OF_ARGUMENTS_LOG_OPTION = 4
+NUMBER_OF_ARGUMENTS_NO_LOG_OPTION = 3
+LOG_ON = "on"
+LOG_OFF = "off"
 
 
 def handle_connection(connection, message):
@@ -24,16 +29,17 @@ def handle_connection(connection, message):
     conn.close()
 
 
-if(len(sys.argv) < 3 and len(sys.argv) > 4):
+if(len(sys.argv) < NUMBER_OF_ARGUMENTS_NO_LOG_OPTION and
+        len(sys.argv) > NUMBER_OF_ARGUMENTS_LOG_OPTION):
     print 'ERROR: Wrong Number of arguments!!!'
     exit(FAIL)
 
 logs = False
 
-if(len(sys.argv) == 4):
-    if(sys.argv[3] == "on"):
+if(len(sys.argv) == NUMBER_OF_ARGUMENTS_LOG_OPTION):
+    if(sys.argv[LOG_OPTION_POSITION] == LOG_ON):
         logs = True
-    elif(sys.argv[3] == "off"):
+    elif(sys.argv[LOG_OPTION_POSITION] == LOG_OFF):
         logs = False
     else:
         print 'ERROR: wrong log option!!!'
